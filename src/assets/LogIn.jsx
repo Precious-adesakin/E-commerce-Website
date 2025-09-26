@@ -24,8 +24,8 @@ const LogIn = ()=>{
   } 
 
   let myStyle3={
-    width:400,
-    marginLeft:50,
+    width:200,
+    marginLeft:130,
     marginTop:50,
     backgroundColor:'#6E54B5',
     color:'white'
@@ -106,7 +106,7 @@ const LogIn = ()=>{
                         type="submit"
                         style={myStyle3}
                         className="btn btn-#6E54B5">
-                        Create Account </button>
+                        Log In </button>
                         </Link>
 
       <div style={{ marginLeft:30, marginTop:50}} >
