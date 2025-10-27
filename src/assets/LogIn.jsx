@@ -9,7 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 
-const LogIn = ()=>{
+const logIn = ()=>{
 
   let myStyle1={
     color:'#2B2738',
@@ -126,7 +126,7 @@ const LogIn = ()=>{
   )
 }
 
-export default LogIn;
+export default logIn;
 
 
 

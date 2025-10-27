@@ -5,16 +5,17 @@ import {Route, Routes, Router} from "react-router-dom"
 import viteLogo from '/vite.svg'
 import './App.css';
 import { Navigate } from 'react-router-dom'
-import Home from "./assets/Home";
-import Details from "./assets/Details";
+import Home from './assets/Home';
+import Details from './assets/Details';
 import Contact from './assets/Contact'
 import AddProduct from './assets/AddProduct';
 import AdminDash from './assets/AdminDash';
 import Cart from './assets/Cart'
 
 import Dash from "./assets/Dash";
-import LogIn from "./assets/login";
-import Signup from "./assets/SignUp";
+// import logIn from "./assets/logIn";
+import logIn from './assets/logIn'
+import SignUp from './assets/SignUp';
 import { motion } from 'framer-motion';
 import Checkout from './assets/Checkout';
 import { CartcontentProvider } from './assets/Cartcontent';
@@ -34,8 +35,8 @@ function App() {
         <Route path="/home" element={<Home/>}></Route>
         <Route path="/contact" element={<Contact/>}></Route>
         {/* <Route path="/formik" element={<Navigate to="/"/>}></Route> */}
-        <Route path="/sign" element={<Signup/>}/>
-        <Route path="/log" element={<LogIn/>}/>
+        <Route path="/sign" element={<SignUp/>}/>
+        <Route path="/log" element={<logIn/>}/>
         <Route path="/dash" element={<Dash/>}></Route>
         <Route path="/info" element={<Details/>}></Route>
         <Route path="/admin" element={<AdminDash />} />
