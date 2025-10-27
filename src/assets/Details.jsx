@@ -1,6 +1,6 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import SignUp from './signup'
+import SignUp from './Signup'
 
 const Details = () => {
 

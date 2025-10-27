@@ -15,7 +15,7 @@ import AdminDash from './assets/AdminDash';
 import Cart from './assets/Cart'
 // import Images from 'Images'
 import '../node_modules/bootstrap/dist/css/bootstrap.css'
-import SignUp from "./assets/signup";
+import SignUp from "./assets/Signup";
 import Dash from "./assets/Dash";
 import LogIn from "./assets/Login";
 import { motion } from 'framer-motion';
