@@ -9,12 +9,13 @@ import Home from "./assets/Home";
 import Details from "./assets/Details";
 import Navbar from './assets/Navbar';
 import Banner from './assets/Banner';
+import Contact from './assets/Contact'
 import Notfound from "./assets/Notfound";
 import AddProduct from './assets/AddProduct';
 import AdminDash from './assets/AdminDash';
 import Cart from './assets/Cart'
 // import Images from 'Images'
-import '../node_modules/bootstrap/dist/css/bootstrap.css'
+// import '../node_modules/bootstrap/dist/css/bootstrap.css'
 import SignUp from "./assets/Signup";
 import Dash from "./assets/Dash";
 import LogIn from "./assets/Login";
