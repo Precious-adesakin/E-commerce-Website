@@ -17,7 +17,6 @@ import Cart from './assets/Cart'
 import '../node_modules/bootstrap/dist/css/bootstrap.css'
 import SignUp from "./assets/signup";
 import Dash from "./assets/Dash";
-// import FormikForm from "./assets/signup";
 import LogIn from "./assets/Login";
 import { motion } from 'framer-motion';
 // import Cart from './assets/Cart';
@@ -47,7 +46,6 @@ function App() {
         <Route path="/log" element={<LogIn/>}/>
         <Route path="/dash" element={<Dash/>}></Route>
         <Route path="/info" element={<Details/>}></Route>
-        <Route path="/dash/:firstname" element={<SignUp/>}></Route>
         <Route path="/admin" element={<AdminDash />} />
         <Route path="/admin/add" element={<AddProduct />} />
         <Route path="/checksucces" element={<Checkout />} />
