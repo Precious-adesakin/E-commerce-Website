@@ -6,7 +6,7 @@ import viteLogo from '/vite.svg'
 import './App.css';
 import { Navigate } from 'react-router-dom'
 import Home from "./assets/Home";
-import Contact from "./assets/login";
+import Contact from "./assets/Login";
 import Details from "./assets/Details";
 import Navbar from './assets/Navbar';
 import Banner from './assets/Banner';
@@ -19,7 +19,7 @@ import '../node_modules/bootstrap/dist/css/bootstrap.css'
 import SignUp from "./assets/signup";
 import Dash from "./assets/Dash";
 // import FormikForm from "./assets/signup";
-import LogIn from "./assets/login";
+import LogIn from "./assets/Login";
 import { motion } from 'framer-motion';
 // import Cart from './assets/Cart';
 import Checkout from './assets/Checkout';

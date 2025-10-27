@@ -111,9 +111,6 @@ const LogIn = ()=>{
         <div style={{ marginTop:50,color:'white',textAlign:'center',width:300, marginLeft:90}}>
           <h3>Does not have an account yet? <span>Click <Link to="/sign"><a href="" className="">Here</a></Link> </span></h3>
         </div>
-      {/* <div style={{ marginLeft:150, marginTop:50}} >
-        <h3 style={{color:'white', }}>Does not have an account Yet?, <span>Click <Link to="/sign"><a href="" className="">Here</a></Link> </span></h3>
-        </div>     */}
 
       </form>
               </div>  

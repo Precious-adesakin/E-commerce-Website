@@ -96,7 +96,7 @@ const SignUp = () =>{
                     <div style={{backgroundColor:'#1F172C',width:1000, height:520,border:20, borderColor:'white', borderRadius:10, marginLeft:70,marginTop:10}} >
 
                     <h1 style={{marginLeft:200}} className="text-primary">Lets Get Started </h1>
-                            <small  style={{marginLeft:240}} className="text-center text-primary">Already have an Account?   <a href="" className="">Log in</a></small>
+                            <small  style={{marginLeft:240}} className="text-center text-primary">Already have an Account?   <a href="/log" className="">Log in</a></small>
 
                     <form action="" onSubmit={formik.handleSubmit}>
                         <section>
