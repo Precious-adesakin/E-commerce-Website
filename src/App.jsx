@@ -6,7 +6,6 @@ import viteLogo from '/vite.svg'
 import './App.css';
 import { Navigate } from 'react-router-dom'
 import Home from "./assets/Home";
-import Contact from "./assets/Login";
 import Details from "./assets/Details";
 import Navbar from './assets/Navbar';
 import Banner from './assets/Banner';
