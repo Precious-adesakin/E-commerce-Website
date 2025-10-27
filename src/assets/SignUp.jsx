@@ -45,7 +45,7 @@ const SignUp = () =>{
         display:'flex',
         backgroundColor:'#2B2738',
         width:1200,
-        height:550,
+        height:560,
         border:5,
         borderRadius:15,
         marginTop:10,
@@ -77,7 +77,7 @@ const SignUp = () =>{
     return(
             <>
             <Navbar/>
-            <div style={{backgroundColor:'#676279', width:1258,height:580, marginLeft:10,marginTop:12}}>
+            <div style={{backgroundColor:'#f9a825', width:1258,height:580, marginLeft:10,marginTop:12}}>
             <div>
                 <div className="row">
                     <div className="col-6 ">

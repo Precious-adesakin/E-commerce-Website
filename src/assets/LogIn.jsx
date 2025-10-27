@@ -11,15 +11,15 @@ const LogIn = ()=>{
 
   let myStyle1={
     color:'#2B2738',
-    width:280,
-    marginLeft:100,
+    width:300,
+    marginLeft:90,
     marginTop:120,
 }    
 
   let myStyle2={
     color:'#2B2738',
-    width:280,
-    marginLeft:100,
+    width:300,
+    marginLeft:90,
     marginTop:75,
   } 
 
@@ -58,7 +58,7 @@ const LogIn = ()=>{
   return(
     <>
     <Navbar/>
-    <div style={{backgroundColor:'#676279', width:1258,height:570, marginLeft:10,marginTop:4}}>
+    <div style={{backgroundColor:'#f9a825', width:1258,height:570, marginLeft:10,marginTop:4}}>
                 <div className="row">
                     <div className="col-6 ">
     <Banner/>
@@ -108,10 +108,12 @@ const LogIn = ()=>{
                         className="btn btn-#6E54B5">
                         Log In </button>
                         </Link>
-
-      <div style={{ marginLeft:30, marginTop:50}} >
-        <h3 style={{color:'white', }}>Does not have an account Yet?, <span style={{marginLeft:20,}}>Click <Link to="/sign"><a href="" className="">Here</a></Link> </span></h3>
-        </div>    
+        <div style={{ marginTop:50,color:'white',textAlign:'center',width:300, marginLeft:90}}>
+          <h3>Does not have an account yet? <span>Click <Link to="/sign"><a href="" className="">Here</a></Link> </span></h3>
+        </div>
+      {/* <div style={{ marginLeft:150, marginTop:50}} >
+        <h3 style={{color:'white', }}>Does not have an account Yet?, <span>Click <Link to="/sign"><a href="" className="">Here</a></Link> </span></h3>
+        </div>     */}
 
       </form>
               </div>  
@@ -124,86 +126,6 @@ const LogIn = ()=>{
     </>  
   )
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import React from 'react';
-// import { Formik, Form, Field, ErrorMessage } from 'formik';
-// import * as Yup from 'yup';
-// import './Login.css';
-
-// const Login = () => {
-//   const initialValues = {
-//     email: '',
-//     password: '',
-//     rememberMe: false,
-//   };
-
-//   const validationSchema = Yup.object({
-//     email: Yup.string().email('Invalid email address').required('Email is required'),
-//     password: Yup.string().min(6, 'Password must be at least 6 characters').required('Password is required'),
-//   });
-
-//   const handleSubmit = (values) => {
-//     // Simulate form submission (replace with actual API call)
-//     console.log('Login submitted:', values);
-//     // Example: fetch('/api/login', { method: 'POST', body: JSON.stringify(values) });
-//   };
-
-//   return (
-//     <div className="login-container">
-//       <div className="left-section">
-//         <h1>Welcome Back!</h1>
-//         <p>Log in to access your personalized shopping experience and exclusive offers.</p>
-//       </div>
-//       <div className="right-section">
-//         <h2>Log In</h2>
-//         <p className="signup-link">Don’t have an account? <a href="/signup">Sign up</a></p>
-//         <Formik
-//           initialValues={initialValues}
-//           validationSchema={validationSchema}
-//           onSubmit={handleSubmit}
-//         >
-//           <Form>
-//             <div className="form-group">
-//               <Field type="email" name="email" placeholder="Email" />
-//               <ErrorMessage name="email" component="div" className="error" />
-//             </div>
-//             <div className="form-group">
-//               <Field type="password" name="password" placeholder="Password" />
-//               <ErrorMessage name="password" component="div" className="error" />
-//             </div>
-//             <div className="form-group">
-//               <label>
-//                 <Field type="checkbox" name="rememberMe" />
-//                 Remember Me
-//               </label>
-//             </div>
-//             <button type="submit">Log In</button>
-//             <p className="forgot-password"><a href="/forgot-password">Forgot Password?</a></p>
-//           </Form>
-//         </Formik>
-//       </div>
-//     </div>
-//   );
-// };
 
 export default LogIn;
 
