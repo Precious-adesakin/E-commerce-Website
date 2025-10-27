@@ -81,7 +81,7 @@ const Home = () => {
               </div>
               <p style={{ margin: '5px 0 0', fontSize: '14px' }}>24.2K User</p>
             </div>
-
+                <div style={{marginLeft:10}}>
             <div style={{ ...floatingCardStyle, backgroundColor: '#fff', }}>
               <img src="https://via.placeholder.com/80" style={{ borderRadius: '8px', width: '100%' }} />
               <p style={{ margin: '5px 0 0', fontSize: '14px', color: '#000' }}>100% Verified</p>
@@ -95,6 +95,7 @@ const Home = () => {
               </div>
               <button>Shop now</button>
             </div>
+                </div>
           </motion.div>
 
           <motion.div

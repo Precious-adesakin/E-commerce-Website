@@ -14,7 +14,7 @@ import Cart from './assets/Cart'
 
 import Dash from "./assets/Dash";
 import LogIn from "./assets/login";
-import Signup from "./assets/Signup";
+import Signup from "./assets/SignUp";
 import { motion } from 'framer-motion';
 import Checkout from './assets/Checkout';
 import { CartcontentProvider } from './assets/Cartcontent';

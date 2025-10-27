@@ -6,8 +6,9 @@ import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
 import Banner from "./Banner";
 import Page from "./Page";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-const Signup = () =>{
+const SignUp = () =>{
     let myStyle1={
         color:'#2B2738',
         width:280,
@@ -170,4 +171,4 @@ const Signup = () =>{
     )
 }
 
-export default Signup;
+export default SignUp;

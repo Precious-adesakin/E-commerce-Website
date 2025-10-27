@@ -5,6 +5,8 @@ import * as yup from "yup"
 import { Formik } from 'formik'
 import Navbar from './Navbar'
 import Banner from './Banner'
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 
 const LogIn = ()=>{
