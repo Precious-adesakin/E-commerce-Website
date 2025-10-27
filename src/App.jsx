@@ -13,8 +13,7 @@ import AdminDash from './assets/AdminDash';
 import Cart from './assets/Cart'
 
 import Dash from "./assets/Dash";
-// import logIn from "./assets/logIn";
-import logIn from './assets/logIn'
+import LogIn from "./assets/LogIn";
 import SignUp from './assets/SignUp';
 import { motion } from 'framer-motion';
 import Checkout from './assets/Checkout';
@@ -36,7 +35,8 @@ function App() {
         <Route path="/contact" element={<Contact/>}></Route>
         {/* <Route path="/formik" element={<Navigate to="/"/>}></Route> */}
         <Route path="/sign" element={<SignUp/>}/>
-        <Route path="/log" element={<logIn/>}/>
+        {/* <Route path="/log" element={<logIn/>}/> */}
+        <Route path="/dash" element={<LogIn/>}></Route>
         <Route path="/dash" element={<Dash/>}></Route>
         <Route path="/info" element={<Details/>}></Route>
         <Route path="/admin" element={<AdminDash />} />
