@@ -15,7 +15,7 @@ import AddProduct from './assets/AddProduct';
 import AdminDash from './assets/AdminDash';
 import Cart from './assets/Cart'
 // import Images from 'Images'
-import '../node_modules/bootstrap/dist/css/bootstrap.css'
+// import '../node_modules/bootstrap/dist/css/bootstrap.css'
 
 import Dash from "./assets/Dash";
 import LogIn from "./assets/Login";
