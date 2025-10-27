@@ -7,7 +7,7 @@ import Navbar from "./Navbar";
 import Banner from "./Banner";
 import Page from "./Page";
 
-const SignUp = () =>{
+const Signup = () =>{
     let myStyle1={
         color:'#2B2738',
         width:280,
@@ -170,4 +170,4 @@ const SignUp = () =>{
     )
 }
 
-export default SignUp
+export default Signup;
