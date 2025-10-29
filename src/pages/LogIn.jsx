@@ -15,7 +15,7 @@ const LogIn = ()=>{
   let myStyle1={
     color:'#2B2738',
     width:400,
-    marginLeft:30,
+    marginLeft:20,
     marginTop:120,
     backgroundColor: '#fff',
     border: 'none',
@@ -27,7 +27,7 @@ const LogIn = ()=>{
   let myStyle2={
     color:'#2B2738',
     width:400,
-    marginLeft:30,
+    marginLeft:20,
     marginTop:75,
     backgroundColor: '#fff',
     border: 'none',
@@ -38,8 +38,8 @@ const LogIn = ()=>{
 
   let myStyle3={
     // width:200,
-    marginLeft:30,
-    marginTop:50,
+    marginLeft:20,
+    // marginTop:50,
     color:'white',
     backgroundColor: '#6E5485',
     border: 'none',
@@ -112,7 +112,7 @@ const LogIn = ()=>{
                         className="btn btn-#6E54B5">
                         Log In </button>
                         </Link>
-        <div style={{ marginTop:50,color:'white',textAlign:'center',width:300, marginLeft:90,}}>
+        <div style={{ marginTop:50,color:'white',textAlign:'center',width:300, marginLeft:80,}}>
           <h3>Does not have an account yet? <span  style={{ textDecoration:'none'}}>Click <Link to="/sign"><a href="" className="">Here</a></Link> </span></h3>
         </div>
 
