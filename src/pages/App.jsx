@@ -5,20 +5,20 @@ import {Route, Routes, Router} from "react-router-dom"
 import viteLogo from '/vite.svg'
 import './App.css';
 import { Navigate } from 'react-router-dom'
-import Home from './assets/Home';
-import Details from './assets/Details';
-import Contact from './assets/Contact'
-import AddProduct from './assets/AddProduct';
-import AdminDash from './assets/AdminDash';
-import Cart from './assets/Cart'
+import Home from './Home';
+import Details from './Details';
+import Contact from './Contact'
+import AddProduct from './AddProduct';
+import AdminDash from './AdminDash';
+import Cart from './Cart'
 
-import Dash from "./assets/Dash";
-import LogIn from "./assets/LogIn";
-import SignUp from './assets/SignUp';
+import Dash from "./Dash";
+import LogIn from "./LogIn";
+import SignUp from './SignUp';
 import { motion } from 'framer-motion';
-import Checkout from './assets/Checkout';
-import { CartcontentProvider } from './assets/Cartcontent';
-import CartNavLink from './assets/CartNavLink';
+import Checkout from './Checkout';
+// import { CartProvider } from './CartContext';
+import CartNavLink from './CartNavLink';
 import { Link } from "react-router-dom";
 
 
@@ -29,6 +29,7 @@ function App() {
   
     return(
       <>
+
     <Routes>
         <Route path="/" element={<Home/>}></Route>
         <Route path="/home" element={<Home/>}></Route>
@@ -36,7 +37,7 @@ function App() {
         {/* <Route path="/formik" element={<Navigate to="/"/>}></Route> */}
         <Route path="/sign" element={<SignUp/>}/>
         {/* <Route path="/log" element={<logIn/>}/> */}
-        <Route path="/dash" element={<LogIn/>}></Route>
+        <Route path="/log" element={<LogIn/>}></Route>
         <Route path="/dash" element={<Dash/>}></Route>
         <Route path="/info" element={<Details/>}></Route>
         <Route path="/admin" element={<AdminDash />} />

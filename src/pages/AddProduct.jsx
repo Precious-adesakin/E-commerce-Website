@@ -1,4 +1,3 @@
-// src/components/AddProduct.jsx
 import { useState } from 'react';
 import axios from 'axios';
 
@@ -6,7 +5,6 @@ export default function AddProduct() {
   const [form, setForm] = useState({ name: '', price: '', quantity: '', picture: '' });
   const [uploading, setUploading] = useState(false);
 
-  // CLOUDINARY UPLOAD FUNCTION
   const uploadImage = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -14,7 +12,7 @@ export default function AddProduct() {
     setUploading(true);
     const formData = new FormData();
     formData.append('file', file);
-    formData.append('upload_preset', 'ecommerce'); // ← CREATE THIS IN CLOUDINARY
+    formData.append('upload_preset', 'ecommerce'); 
 
     try {
       const res = await axios.post(

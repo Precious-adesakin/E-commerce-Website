@@ -20,14 +20,15 @@ const Home = () => {
         justifyContent: 'space-between',
         alignItems: 'center',
       }}>
-        <div style={{marginTop:15, backgroundColor:'black', width:1600,borderRadius:30, display:'flex', height:60}}>
+        <div style={{marginTop:15, backgroundColor:'black', width:1600,borderRadius:30, display:'flex', height:60, textDecoration:'none'}}>
         <h1 style={{ marginTop:12, marginLeft:25, fontSize: '24px', fontWeight: 'bold' }}>Tech Store</h1>
-        <nav style={{ display: 'flex', gap: '30px', alignItems: 'right', marginLeft:350, marginTop:18 }}>
+        <nav style={{ display: 'flex', gap: '30px', alignItems: 'right', marginLeft:550, marginTop:18,  }}>
+          <a href="#" style={navLinkStyle}>Blog</a>
+          <a href="#" style={navLinkStyle}>Flash Sale</a>
           <a href="#" style={navLinkStyle}>News</a>
-          <a href="#" style={navLinkStyle}>Info</a>
-          <div style={{}}>
-          <button style={signInBtnStyle}> <Link to="/log"> Log In</Link> </button>
-          <button style={signInBtnStyle}><Link to="/sign"> Sign In</Link></button>      
+          <div style={{marginBottom:50,marginLeft:10, }}>
+          <Link to="/log" style={navLinkStyle} > Log In</Link> 
+          <Link to="/sign" style={navLinkStyle}> Sign In</Link>     
           </div>   
         </nav>
         </div>
@@ -70,32 +71,10 @@ const Home = () => {
               display: 'flex',
               flexDirection: 'column',
               gap: '15px',
-              marginLeft:600
+              marginLeft:800
             }}
           >
-            <div style={floatingCardStyle}>
-              <div style={{ display: 'flex', gap: '5px' }}>
-                <div style={avatarStyle}></div>
-                <div style={avatarStyle}></div>
-                <div style={avatarStyle}></div>
-              </div>
-              <p style={{ margin: '5px 0 0', fontSize: '14px' }}>24.2K User</p>
-            </div>
-                <div style={{marginLeft:10}}>
-            <div style={{ ...floatingCardStyle, backgroundColor: '#fff', }}>
-              <img src="https://via.placeholder.com/80" style={{ borderRadius: '8px', width: '100%' }} />
-              <p style={{ margin: '5px 0 0', fontSize: '14px', color: '#000' }}>100% Verified</p>
-            </div>
-
-            <div style={{ ...floatingCardStyle, backgroundColor: '#fff' }}>
-              <img src="https://via.placeholder.com/80" style={{ borderRadius: '8px', width: '100%' }} />
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '5px' }}>
-                <span style={{ fontSize: '14px', color: '#000' }}>Active jo</span>
-                <span style={{ fontSize: '18px', fontWeight: 'bold', color: '#000' }}>2598 <span style={{ fontSize: '14px' }}>+4</span></span>
-              </div>
-              <button>Shop now</button>
-            </div>
-                </div>
+              {/*  */}
           </motion.div>
 
           <motion.div
@@ -104,41 +83,9 @@ const Home = () => {
             transition={{ duration: 0.6, delay: 0.6 }}
             style={{ marginTop: '40px' }}
           >
-            {/* <div style={{
-              backgroundColor: '#fff',
-              borderRadius: '12px',
-              padding: '10px',
-              display: 'flex',
-              alignItems: 'center',
-              maxWidth: '600px'
-            }}>
-              <input
-                type="text"
-                placeholder="Search"
-                style={{
-                  flex: 1,
-                  border: 'none',
-                  outline: 'none',
-                  padding: '12px',
-                  fontSize: '16px'
-                }}
-              />
-              <button style={{
-                backgroundColor: '#000',
-                color: '#fff',
-                border: 'none',
-                width: '50px',
-                height: '50px',
-                borderRadius: '8px',
-                fontSize: '20px',
-                cursor: 'pointer'
-              }}>
-                
-              </button>
-            </div> */}
 
             <div style={{ marginTop: '20px', display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-              <span style={{ color: '#000', fontWeight: 'bold' }}>Suggested:</span>
+              <span style={{ color: '#000', fontWeight: 'bold', fontSize:20 }}>Suggested:</span>
               {['Marketing', 'Sales', 'Remote', 'On-site', 'Full-time', 'Part-time'].map((tag) => (
                 <span key={tag} style={tagStyle}>{tag}</span>
               ))}
@@ -161,7 +108,7 @@ const Home = () => {
           transition={{ duration: 0.6 }}
           style={{ fontSize: '32px', marginBottom: '40px' }}
         >
-          Promoted jobs
+          Promoted Deals
         </motion.h2>
 
         <div style={{
@@ -171,9 +118,9 @@ const Home = () => {
           marginTop:60
         }}>
           {[
-            { title: 'Finance Controller', type: 'On-Site, Hybrid', time: 'Full-time', company: 'TechTonic Solutions' },
-            { title: 'Support Associate', type: 'On-Site, Hybrid', time: 'Part-time', company: 'Innovize labs' },
-            { title: 'Tech Marketing Specialist', type: 'Remote', time: 'Contract', company: 'SwiftSphere Innovations' }
+            { title: 'Fast delivery', type: 'Same-Day Dispatch, ', time: '2-hour Metro.', company: 'Powered by SwiftLogix' },
+            { title: 'Customer Support Tier', type: 'Live Chat,', time: 'Real Fast.', company: 'Innovize labs' },
+            { title: 'Digital Marketing Boost', type: 'Remote', time: 'Contract', company: 'SwiftSphere Innovations' }
           ].map((job, index) => (
             <motion.div
               key={job.title}

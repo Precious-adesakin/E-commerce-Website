@@ -1,6 +1,6 @@
 // src/components/CartNavLink.jsx
 import { Link } from 'react-router-dom';
-import { useCart } from '../assets/Cartcontent';
+import { useCart } from './Cartcontent';
 
 export default function CartNavLink() {
   const { cart } = useCart(); // SAFE: inside Provider

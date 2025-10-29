@@ -1,7 +1,6 @@
-// src/context/Cartcontent.jsx
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import Cart from './Cart';
 
-// YOUR NAME: Cartcontent
 const Cartcontent = createContext();
 
 export const useCart = () => useContext(Cartcontent);
@@ -13,7 +12,7 @@ export const CartcontentProvider = ({ children }) => {
     const saved = localStorage.getItem('cart');
     if (saved) setCart(JSON.parse(saved));
   }, []);
-
+// 
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cart));
   }, [cart]);

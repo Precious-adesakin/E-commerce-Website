@@ -1,0 +1,84 @@
+/* Responsive rules specifically for SignUp layout. Non-intrusive: only apply at narrower breakpoints. */
+
+/* Keep desktop styles unchanged. Apply overrides only on tablets and phones. */
+
+/* Medium screens and below */
+@media (max-width: 1200px) {
+  /* Ensure the large outer background container becomes fluid */
+  div[style*="backgroundColor:'#2B2738'"], div[style*="backgroundColor:#2B2738"] ,
+  div[style*="width:1258"], div[style*="width:1258px"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Reduce the heavy fixed width on the inner flex container */
+  div[style*="width:1200"], div[style*="width:1200px"] {
+    width: 100% !important;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+
+  /* Make inputs and buttons responsive */
+  input.form-control, input[type="text"], textarea, select {
+    width: 90% !important;
+    max-width: 900px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    display: block !important;
+  }
+
+  button, .btn { width: 90% !important; max-width: 900px !important; display: block !important; margin: 12px auto !important; }
+
+  /* Banner and Page blocks should be flexible */
+  span[style*="width:500"], div[style*="width:1000"], div[style*="width:1000px"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding: 8px !important;
+  }
+
+  /* Checkbox row wrap */
+  #flip { display:flex !important; flex-wrap:wrap !important; justify-content:center !important; gap:8px !important; }
+}
+
+@media (max-width: 992px) {
+  body { font-size: 95%; }
+
+  /* Inputs more generous on smaller screens */
+  input.form-control, input[type="text"], textarea, select { width: 100% !important; }
+
+  /* Remove large left margins applied inline */
+  [style*="marginLeft:75"], [style*="marginLeft:70"], [style*="marginLeft:35"], [style*="marginLeft:17"] {
+    margin-left: 10px !important;
+    margin-right: 10px !important;
+  }
+
+  /* Ensure inner card becomes full width */
+  div[style*="backgroundColor:'#1F172C'"], div[style*="backgroundColor:#1F172C"], div[style*="width:1000"] {
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding: 12px !important;
+  }
+}
+
+@media (max-width: 576px) {
+  input.form-control, input[type="text"], textarea, select { width: 100% !important; padding-left: 12px !important; padding-right: 12px !important; }
+  button, .btn { width: 100% !important; }
+
+  /* Make tall fixed-height boxes auto height */
+  div[style*="height:560"], div[style*="height:520"], div[style*="height:580"] {
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  /* Slight typography scaling */
+  h1 { font-size: 1.4rem !important; }
+  h2 { font-size: 1.05rem !important; }
+}

@@ -1,17 +1,6 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import './index.css'
-// import '../node_modules/bootstrap/dist/css/bootstrap.css'
-import { BrowserRouter } from 'react-router-dom'
-import { CartcontentProvider } from './assets/Cartcontent.jsx';
+// Entry shim: index.html expects /src/main.jsx. This file forwards to the real entry
+// at src/pages/Main.jsx without changing application logic.
+console.log('[debug] src/main.jsx loaded');
+import './pages/Main.jsx';
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <BrowserRouter>
-    <CartcontentProvider>
-      <App />
-    </CartcontentProvider>
-    </BrowserRouter>
-  </React.StrictMode>
-);
+// No exports — Main.jsx performs the ReactDOM.createRoot render when loaded.
