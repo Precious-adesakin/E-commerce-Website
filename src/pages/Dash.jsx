@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react';
+// Dash.jsx
+import React, { useState, useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Link } from 'react-router-dom';
-import cart from './Cart';
 
 const Dash = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [searchQuery, setSearchQuery] = useState('');
   const [heroRef, heroInView] = useInView({ triggerOnce: true, threshold: 0.2 });
   const [categoriesRef, categoriesInView] = useInView({ triggerOnce: true, threshold: 0.1 });
   const [productsRef, productsInView] = useInView({ triggerOnce: true, threshold: 0.1 });
@@ -33,7 +34,6 @@ const Dash = () => {
       return [...prev, { ...product, qty: 1 }];
     });
   };
-  
 
   const cartCount = cart.reduce((sum, item) => sum + item.qty, 0);
 
@@ -64,67 +64,110 @@ const Dash = () => {
     { id: 14, name: 'Wireless Mouse', price: 49, category: 'accessories', rating: 4.6, inStock: true }
   ];
 
-  const filteredProducts = selectedCategory === 'all' 
-    ? products 
-    : products.filter(p => p.category === selectedCategory);
+  // LIVE FILTER: SEARCH + CATEGORY
+  const filteredProducts = useMemo(() => {
+    let filtered = products;
+
+    if (selectedCategory !== 'all') {
+      filtered = filtered.filter(p => p.category === selectedCategory);
+    }
+
+    if (searchQuery.trim()) {
+      const query = searchQuery.toLowerCase();
+      filtered = filtered.filter(p =>
+        p.name.toLowerCase().includes(query)
+      );
+    }
+
+    return filtered;
+  }, [selectedCategory, searchQuery, products]);
 
   return (
-    <div style={{ backgroundColor: '#121212', color: '#ffffff', minHeight: '100vh' }}>
-      {/* HEADER */}
-      <header style={headerStyle}>
-        <h1 style={{ margin: 0, fontWeight: 'bold' }}>TechStore</h1>
-        <nav style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
-          <Link to="/" style={navLinkStyle}>Home</Link>
-          <a href="/dash" style={navLinkStyle}>Products</a>
-          <a href="#" style={navLinkStyle}>Deals</a>
-          <a href="#" style={navLinkStyle}>Support</a>
-          <button style={quoteBtnStyle}>Get Quote</button>
-          <Link to="/cart" style={{ position: 'relative', ...navLinkStyle }}>
-            Cart
-            {cartCount > 0 && (
-              <span style={{
-                position: 'absolute',
-                top: '-8px',
-                right: '-12px',
-                backgroundColor: '#f9a825',
-                color: '#000',
-                borderRadius: '50%',
-                width: '20px',
-                height: '20px',
-                fontSize: '12px',
-                fontWeight: 'bold',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center'
-              }}>
-                {cartCount}
-              </span>
-            )}
-          </Link>
-        </nav>
-      </header>
+    <div style={{ backgroundColor: '#121212', color: '#fff', minHeight: '100vh' }}>
+      {/* NAVBAR */}
+      <Navbar cartCount={cartCount} />
 
       {/* HERO */}
-      <motion.section ref={heroRef} initial={{ opacity: 0 }} animate={heroInView ? { opacity: 1 } : {}} transition={{ duration: 0.8 }}
-        style={{ backgroundColor: '#f9a825', padding: '100px 40px', color: '#000', textAlign: 'center' }}>
-        <motion.h1 initial={{ opacity: 0, y: 30 }} animate={heroInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6 }}
-          style={{ fontSize: '52px', fontWeight: 'bold', marginBottom: '20px' }}>
-          Premium Tech, Curated for You
-        </motion.h1>
-        <motion.p initial={{ opacity: 0, y: 20 }} animate={heroInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.2 }}
-          style={{ fontSize: '20px', marginBottom: '40px' }}>
-          Phones  Laptops  eGadgets  Accessories
-        </motion.p>
-        <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={heroInView ? { opacity: 1, scale: 1 } : {}} transition={{ duration: 0.6, delay: 0.4 }}>
-          <button style={ctaBtnStyle}>Shop All</button>
-        </motion.div>
+      <motion.section
+        ref={heroRef}
+        initial={{ opacity: 0 }}
+        animate={heroInView ? { opacity: 1 } : {}}
+        transition={{ duration: 0.8 }}
+        style={{
+          backgroundColor: '#f9a825',
+          color: '#000',
+          padding: '100px 20px',
+          textAlign: 'center',
+        }}
+      >
+        <div className="container" style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={heroInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6 }}
+            style={{ fontSize: 'clamp(36px, 5vw, 52px)', fontWeight: 'bold', marginBottom: '16px' }}
+          >
+            Premium Tech, Curated for You
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={heroInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            style={{ fontSize: '20px', marginBottom: '32px' }}
+          >
+            Phones • Laptops • eGadgets • Accessories
+          </motion.p>
+
+          {/* SEARCH BAR */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={heroInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            style={{ maxWidth: '600px', margin: '0 auto' }}
+          >
+            <div style={{ position: 'relative' }}>
+              <input
+                type="text"
+                placeholder="Search products..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                style={{
+                  width: '100%',
+                  padding: '16px 50px 16px 20px',
+                  borderRadius: '30px',
+                  border: 'none',
+                  fontSize: '16px',
+                  backgroundColor: '#fff',
+                  color: '#000',
+                  outline: 'none',
+                  boxShadow: '0 4px 15px rgba(0,0,0,0.1)',
+                }}
+              />
+              <span style={{
+                position: 'absolute',
+                right: '18px',
+                top: '50%',
+                transform: 'translateY(-50%)',
+                fontSize: '20px',
+                color: '#666'
+              }}>
+                Search
+              </span>
+            </div>
+          </motion.div>
+        </div>
       </motion.section>
 
       {/* CATEGORIES */}
-      <motion.section ref={categoriesRef} initial={{ opacity: 0, y: 30 }} animate={categoriesInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6 }}
-        style={{ padding: '40px 20px', backgroundColor: '#1e1e1e' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', justifyContent: 'center' }}>
+      <motion.section
+        ref={categoriesRef}
+        initial={{ opacity: 0, y: 30 }}
+        animate={categoriesInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.6 }}
+        style={{ padding: '40px 20px', backgroundColor: '#1e1e1e' }}
+      >
+        <div className="container" style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', justifyContent: 'center' }}>
             {categories.map(cat => (
               <motion.button
                 key={cat.id}
@@ -135,8 +178,9 @@ const Dash = () => {
                   ...categoryBtnStyle,
                   backgroundColor: selectedCategory === cat.id ? '#f9a825' : '#2a2a2a',
                   color: selectedCategory === cat.id ? '#000' : '#fff',
-                  padding: '10px 16px',
-                  fontSize: '14px'
+                  padding: '12px 24px',
+                  fontSize: '15px',
+                  fontWeight: '600',
                 }}
               >
                 {cat.name}
@@ -146,100 +190,298 @@ const Dash = () => {
         </div>
       </motion.section>
 
-      {/* PRODUCTS — NOW USING FLEX */}
-      <motion.section ref={productsRef} initial={{ opacity: 0 }} animate={productsInView ? { opacity: 1 } : {}} transition={{ duration: 0.8 }}
-        style={{ padding: '60px 20px', backgroundColor: '#121212' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <motion.h2 initial={{ opacity: 0, x: -30 }} animate={productsInView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.6 }}
-            style={{ fontSize: '36px', marginBottom: '40px', textAlign: 'center' }}>
-            {selectedCategory === 'all' ? 'All Products' : categories.find(c => c.id === selectedCategory)?.name}
+      {/* PRODUCTS */}
+      <motion.section
+        ref={productsRef}
+        initial={{ opacity: 0 }}
+        animate={productsInView ? { opacity: 1 } : {}}
+        transition={{ duration: 0.8 }}
+        style={{ padding: '60px 20px', backgroundColor: '#121212' }}
+      >
+        <div className="container" style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          <motion.h2
+            initial={{ opacity: 0, x: -30 }}
+            animate={productsInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.6 }}
+            style={{ fontSize: '36px', fontWeight: 'bold', marginBottom: '40px', textAlign: 'center' }}
+          >
+            {searchQuery
+              ? `Results for "${searchQuery}"`
+              : selectedCategory === 'all'
+                ? 'All Products'
+                : categories.find(c => c.id === selectedCategory)?.name
+            }
+            {filteredProducts.length === 0 && ' — No matches'}
           </motion.h2>
 
-          {/* FLEX CONTAINER */}
-          <div style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            gap: '25px',
-            justifyContent: 'center',
-            alignItems: 'stretch'
-          }}>
-            {filteredProducts.map((product, i) => (
-              <motion.div
-                key={product.id}
-                initial={{ opacity: 0, y: 30 }}
-                animate={productsInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                whileHover={{ y: -8, boxShadow: '0 20px 40px rgba(0,0,0,0.3)' }}
-                style={{
-                  ...productCardStyle,
-                  flex: '1 1 300px',   
-                  maxWidth: '340px'
-                }}
-              >
-                <div style={{ position: 'relative' }}>
-                  <div style={{
-                    backgroundColor: '#2a2a2a',
-                    height: '200px',
-                    borderRadius: '12px 12px 0 0',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontSize: '50px',
-                    color: '#555'
-                  }}>
-                    {getIcon(product.category)}
+          {filteredProducts.length === 0 ? (
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              style={{ textAlign: 'center', color: '#aaa', fontSize: '18px', marginTop: '40px' }}
+            >
+              No products found. Try adjusting your search or filters.
+            </motion.p>
+          ) : (
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+                gap: '24px',
+              }}
+            >
+              {filteredProducts.map((product, i) => (
+                <motion.div
+                  key={product.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={productsInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.5, delay: i * 0.1 }}
+                  whileHover={{ y: -8, boxShadow: '0 20px 40px rgba(0,0,0,0.3)' }}
+                  style={{
+                    backgroundColor: '#1e1e1e',
+                    borderRadius: '16px',
+                    overflow: 'hidden',
+                    border: '1px solid #333',
+                    transition: 'all 0.3s',
+                  }}
+                >
+                  <div style={{ position: 'relative' }}>
+                    <div style={{
+                      backgroundColor: '#2a2a2a',
+                      height: '200px',
+                      borderRadius: '16px 16px 0 0',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontSize: '60px',
+                      color: '#555',
+                    }}>
+                      {getIcon(product.category)}
+                    </div>
+                    {!product.inStock && (
+                      <div style={outOfStockBadge}>Out of Stock</div>
+                    )}
                   </div>
-                  {!product.inStock && <div style={outOfStockBadge}>Out of Stock</div>}
-                </div>
 
-                <div style={{ padding: '20px' }}>
-                  <h3 style={{ margin: '0 0 8px', fontSize: '18px' }}>{product.name}</h3>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '5px', marginBottom: '10px' }}>
-                    <span style={{ color: '#f9a825' }}>Rating: {product.rating}/5</span>
-                    <span style={{ color: '#aaa', fontSize: '14px' }}>({Math.floor(Math.random() * 200)} reviews)</span>
+                  <div style={{ padding: '24px' }}>
+                    <h3 style={{ margin: '0 0 12px', fontSize: '20px', fontWeight: '600' }}>
+                      {product.name}
+                    </h3>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
+                      <span style={{ color: '#f9a825', fontWeight: 'bold' }}>
+                        {product.rating} stars
+                      </span>
+                      <span style={{ color: '#aaa', fontSize: '14px' }}>
+                        ({Math.floor(Math.random() * 200) + 50} reviews)
+                      </span>
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <p style={{ fontSize: '24px', fontWeight: 'bold', margin: 0 }}>
+                        ${product.price}
+                      </p>
+                      <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={() => addToCart(product)}
+                        disabled={!product.inStock}
+                        style={{
+                          ...addToCartBtn,
+                          opacity: product.inStock ? 1 : 0.5,
+                          cursor: product.inStock ? 'pointer' : 'not-allowed',
+                        }}
+                      >
+                        {product.inStock ? 'Add to Cart' : 'Sold Out'}
+                      </motion.button>
+                    </div>
                   </div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <p style={{ fontSize: '22px', fontWeight: 'bold', margin: 0 }}>${product.price}</p>
-                    <button
-                      onClick={() => addToCart(product)}
-                      style={{ ...addToCartBtn, opacity: product.inStock ? 1 : 0.5, cursor: product.inStock ? 'pointer' : 'not-allowed' }}
-                      disabled={!product.inStock}
-                    >
-                      {product.inStock ? 'Add to Cart' : 'Sold Out'}
-                    </button>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+                </motion.div>
+              ))}
+            </div>
+          )}
         </div>
       </motion.section>
 
-      {/* CTA */}
-      <section style={{ backgroundColor: '#1e1e1e', padding: '80px 40px', textAlign: 'center' }}>
-        <h2 style={{ fontSize: '32px', marginBottom: '20px' }}>Need Help Choosing?</h2>
-        <p style={{ fontSize: '18px', color: '#aaa', marginBottom: '30px' }}>
-          Chat with our tech experts or get a custom quote.
-        </p>
-        <button style={ctaBtnStyle}>Contact Sales</button>
-      </section>
+      {/* CTA - FULLY RESPONSIVE */}
+<section
+  style={{
+    backgroundColor: '#1e1e1e',
+    padding: '60px 20px',
+    textAlign: 'center',
+    borderTop: '1px solid #333',
+  }}
+>
+  <div
+    className="container"
+    style={{
+      maxWidth: '1200px',
+      margin: '0 auto',
+      padding: '0 16px',
+    }}
+  >
+    <motion.h2
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+      style={{
+        fontSize: 'clamp(28px, 5vw, 36px)',
+        fontWeight: 'bold',
+        marginBottom: '16px',
+        lineHeight: '1.3',
+      }}
+    >
+      Need Help Choosing?
+    </motion.h2>
+
+    <motion.p
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: 0.2 }}
+      style={{
+        fontSize: 'clamp(16px, 4vw, 18px)',
+        color: '#aaa',
+        marginBottom: '32px',
+        maxWidth: '700px',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        lineHeight: '1.6',
+      }}
+    >
+      Chat with our tech experts or get a custom quote. We’re here to help you find the perfect device.
+    </motion.p>
+
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: 0.4 }}
+    >
+      <motion.button
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        style={{
+          backgroundColor: '#f9a825',
+          color: '#000',
+          border: 'none',
+          padding: '16px 36px',
+          borderRadius: '30px',
+          fontSize: 'clamp(16px, 4vw, 18px)',
+          fontWeight: 'bold',
+          cursor: 'pointer',
+          boxShadow: '0 4px 15px rgba(249, 168, 37, 0.4)',
+          minWidth: '200px',
+        }}
+      >
+        Contact Sales
+      </motion.button>
+    </motion.div>
+  </div>
+</section>
     </div>
   );
 };
 
+// ICONS
 const getIcon = (category) => {
   const icons = { phones: 'Phone', laptops: 'Laptop', egadgets: 'Watch', accessories: 'Plug' };
   return icons[category] || 'Box';
 };
 
-const headerStyle = { position: 'sticky', top: 0, zIndex: 100, backgroundColor: '#1a1a1a', borderBottom: '1px solid #333', padding: '15px 40px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' };
-const navLinkStyle = { color: '#ffffff', textDecoration: 'none', fontWeight: '500' };
-const quoteBtnStyle = { backgroundColor: 'transparent', color: '#ffffff', border: '1px solid #ffffff', padding: '8px 16px', borderRadius: '20px', fontSize: '14px', cursor: 'pointer' };
-const signInBtnStyle = { backgroundColor: '#f9a825', color: '#000', border: 'none', padding: '8px 16px', borderRadius: '20px', fontSize: '14px', fontWeight: 'bold', cursor: 'pointer' };
-const ctaBtnStyle = { backgroundColor: '#000', color: '#f9a825', border: 'none', padding: '14px 32px', borderRadius: '30px', fontSize: '16px', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 4px 15px rgba(0,0,0,0.3)' };
-const categoryBtnStyle = { padding: '10px 20px', borderRadius: '30px', border: 'none', fontWeight: 'bold', cursor: 'pointer', transition: 'all 0.3s' };
-const productCardStyle = { backgroundColor: '#1e1e1e', borderRadius: '12px', overflow: 'hidden', border: '1px solid #333', transition: 'all 0.3s', cursor: 'pointer' };
-const outOfStockBadge = { position: 'absolute', top: '10px', left: '10px', backgroundColor: 'rgba(255,0,0,0.8)', color: '#fff', padding: '4px 10px', borderRadius: '20px', fontSize: '12px', fontWeight: 'bold' };
-const addToCartBtn = { backgroundColor: '#f9a825', color: '#000', border: 'none', padding: '8px 16px', borderRadius: '8px', fontWeight: 'bold', fontSize: '14px' };
+// STYLES
+const ctaBtnStyle = {
+  backgroundColor: '#000',
+  color: '#f9a825',
+  border: 'none',
+  padding: '16px 36px',
+  borderRadius: '30px',
+  fontSize: '18px',
+  fontWeight: 'bold',
+  cursor: 'pointer',
+  boxShadow: '0 4px 15px rgba(0,0,0,0.3)',
+};
+
+const categoryBtnStyle = {
+  padding: '12px 24px',
+  borderRadius: '30px',
+  border: 'none',
+  fontWeight: '600',
+  cursor: 'pointer',
+  transition: 'all 0.3s',
+};
+
+const outOfStockBadge = {
+  position: 'absolute',
+  top: '12px',
+  left: '12px',
+  backgroundColor: 'rgba(255,0,0,0.9)',
+  color: '#fff',
+  padding: '6px 12px',
+  borderRadius: '20px',
+  fontSize: '13px',
+  fontWeight: 'bold',
+};
+
+const addToCartBtn = {
+  backgroundColor: '#f9a825',
+  color: '#000',
+  border: 'none',
+  padding: '10px 20px',
+  borderRadius: '8px',
+  fontWeight: 'bold',
+  fontSize: '15px',
+};
+
+// NAVBAR
+const Navbar = ({ cartCount }) => (
+  <nav style={{
+    backgroundColor: '#1a1a1a',
+    borderBottom: '1px solid #333',
+    padding: '16px 20px',
+    position: 'sticky',
+    top: 0,
+    zIndex: 1000,
+  }}>
+    <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <Link to="/" style={{ color: '#f9a825', fontSize: '24px', fontWeight: 'bold', textDecoration: 'none' }}>
+        TechStore
+      </Link>
+      <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
+        <Link to="/" style={navLinkStyle}>Home</Link>
+        <Link to="/dash" style={navLinkStyle}>Products</Link>
+        <Link to="/cart" style={{ position: 'relative', ...navLinkStyle }}>
+          Cart
+          {cartCount > 0 && (
+            <motion.span
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              style={{
+                position: 'absolute',
+                top: '-8px',
+                right: '-12px',
+                backgroundColor: '#f9a825',
+                color: '#000',
+                borderRadius: '50%',
+                width: '22px',
+                height: '22px',
+                fontSize: '12px',
+                fontWeight: 'bold',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              {cartCount}
+            </motion.span>
+          )}
+        </Link>
+      </div>
+    </div>
+  </nav>
+);
+
+const navLinkStyle = {
+  color: '#fff',
+  textDecoration: 'none',
+  fontWeight: '500',
+  fontSize: '16px',
+};
 
 export default Dash;
